@@ -4,17 +4,12 @@ import com.exchange.rate.dto.request.ExchangeRateRequest;
 import com.exchange.rate.dto.response.ExchangeRateResponse;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class BuilderUtil {
-
-    public static WebClient buildWebClient(final String baseUrl) {
-        return WebClient.builder().baseUrl(baseUrl).build();
-    }
 
     public static ExchangeRateResponse buildExchangeRateResponse(final ExchangeRateRequest exchangeRateRequest,
                                                                  final BigDecimal exchangeRate,
