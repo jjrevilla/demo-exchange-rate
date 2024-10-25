@@ -2,6 +2,7 @@ package com.exchange.rate.handler;
 
 import com.exchange.rate.dto.error.ErrorDetails;
 import com.exchange.rate.exceptions.ExternalRestException;
+import com.exchange.rate.exceptions.ResourceNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.support.WebExchangeBindException;
 
 import static com.exchange.rate.util.Constants.BAD_INPUT_CODE;
 import static com.exchange.rate.util.Constants.BAD_INPUT_MESSAGE;
+import static com.exchange.rate.util.Constants.CURRENCY_NOT_FOUND_CODE;
 import static com.exchange.rate.util.Constants.ERROR_PARSE_MESSAGE;
 import static com.exchange.rate.util.Constants.EXTERNAL_ERROR_CODE;
 import static com.exchange.rate.util.Constants.EXTERNAL_ERROR_MESSAGE;
@@ -44,6 +46,14 @@ public class GlobalExceptionHandler {
                 .build();
         return new ResponseEntity<>(errorDetails,
                 errorParse ? HttpStatus.INTERNAL_SERVER_ERROR : HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<?> handleResourceNotFoundException(final ResourceNotFoundException ex) {
+        log.error(ex.getMessage(), ex);
+        final ErrorDetails errorDetails =
+                ErrorDetails.builder().code(CURRENCY_NOT_FOUND_CODE).message(ex.getMessage()).build();
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
