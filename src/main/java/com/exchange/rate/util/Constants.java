@@ -15,6 +15,9 @@ public final class Constants {
     public static final String ERROR_PARSE_MESSAGE = "Error parsing response from external service.";
     public static final String EXCHANGE_RATE_TABLE_NAME = "exchange_rate";
     public static final String CIRCUIT_BREAKER_EXCHANGE_RATE_NAME = "exchange-rate-service";
+    public static final String EXCHANGE_RATE_CACHE_VALUE = "cachedExchangeRateResponses";
+    public static final String EXCHANGE_RATE_KEY_GENERATOR = "exchangeRateKeyGenerator";
+    public static final long EXCHANGE_RATE_KEY_CACHE_TTL = 5;
 
     public static final String INTERNAL_ERROR_CODE = "E001";
     public static final String INTERNAL_ERROR_MESSAGE = "An unexpected error occurred.";

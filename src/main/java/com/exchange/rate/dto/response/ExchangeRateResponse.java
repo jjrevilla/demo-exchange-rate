@@ -4,12 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Builder
 @Getter
 @Setter
-public class ExchangeRateResponse {
+public class ExchangeRateResponse implements Serializable {
 
     private String exchangeRateId;
 

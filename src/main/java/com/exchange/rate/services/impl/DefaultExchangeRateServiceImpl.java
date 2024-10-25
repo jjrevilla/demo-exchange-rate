@@ -7,6 +7,7 @@ import com.exchange.rate.repository.ExchangeRateRepository;
 import com.exchange.rate.services.DefaultExchangeRateService;
 import com.exchange.rate.util.BuilderUtil;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -16,12 +17,14 @@ import static com.exchange.rate.util.Constants.CURRENCY_NOT_FOUND_MESSAGE;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class DefaultExchangeRateServiceImpl implements DefaultExchangeRateService {
 
     private final ExchangeRateRepository exchangeRateRepository;
 
     @Override
     public Mono<ExchangeRateResponse> exchangeRate(final ExchangeRateRequest exchangeRateRequest) {
+        log.info("Generating exchange rates from Internal Database.");
         return getExchangeRate(exchangeRateRequest);
     }
 
